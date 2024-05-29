@@ -3,7 +3,7 @@ import { error } from '@sveltejs/kit';
 
 /** @type {import('./$types').RequestHandler} */
 
-export async function POST({ request }) {
+export async  function POST({ request }) {
     const t = await request.json();
     console.log(t);
     const { num1, num2, operator } = t;
