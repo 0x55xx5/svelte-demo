@@ -23,15 +23,20 @@ export default {
             /**
              * GET /api/getHelloworld
              */
-            async GET(
-                init?: RequestInit,
-            ): Promise<{
-                demoappApiKey: string;
-                supabasePrivateKey: string;
-                supabaseJWTSecret: string;
-                supabaseUrl: string;
-            }> {
+            async GET(init?: RequestInit): Promise<string> {
                 return fetch(`/api/getHelloworld`, {
+                    method: 'GET',
+                    ...init,
+                }).then((res) => res.json());
+            },
+        },
+
+        getProducts: {
+            /**
+             * GET /api/getProducts
+             */
+            async GET(init?: RequestInit): Promise<any[]> {
+                return fetch(`/api/getProducts`, {
                     method: 'GET',
                     ...init,
                 }).then((res) => res.json());
