@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
-import { secret } from '$lib/services/secrets';
+import { PUBLIC_SUPABASE_URL,PUBLIC_SUPABASE_ANON_KEY } from '$env/static/public';
 
 
-export const supabaseAdminClient = createClient(secret.supabaseUrl, secret.supabasePrivateKey);
+export const supabaseAdminClient = createClient(PUBLIC_SUPABASE_URL,PUBLIC_SUPABASE_ANON_KEY);
