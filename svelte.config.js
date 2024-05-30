@@ -4,7 +4,10 @@ export default {
 		adapter: adapter({
 			// see below for options that can be set here
 			runtime: 'nodejs18.x'
-		})
+		}),
+    	csrf: {
+      checkOrigin: false,
+    }
 		
 	}
 };

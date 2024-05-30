@@ -5,6 +5,59 @@
 
 export default {
     api: {
+        authentication: {
+            login: {
+                /**
+                 * POST /api/authentication/login
+                 */
+                async POST(
+                    init?: RequestInit,
+                ): Promise<{ status: string; sessionToken: string }> {
+                    return fetch(`/api/authentication/login`, {
+                        method: 'POST',
+                        ...init,
+                    }).then((res) => res.json());
+                },
+            },
+
+            register: {
+                /**
+                 * POST /api/authentication/register
+                 */
+                async POST(
+                    init?: RequestInit,
+                ): Promise<
+                    | { status: string; description: string }
+                    | { status: string; sessionToken: string }
+                > {
+                    return fetch(`/api/authentication/register`, {
+                        method: 'POST',
+                        ...init,
+                    }).then((res) => res.json());
+                },
+            },
+
+            userdata: {
+                /**
+                 * POST /api/authentication/userdata
+                 */
+                async POST(
+                    init?: RequestInit,
+                ): Promise<
+                    | { status: string; description: string }
+                    | { status: string; description: string }
+                    | { status: string; description: string }
+                    | { status: string; description: string }
+                    | { status: string; dataUser: any }
+                > {
+                    return fetch(`/api/authentication/userdata`, {
+                        method: 'POST',
+                        ...init,
+                    }).then((res) => res.json());
+                },
+            },
+        },
+
         cal: {
             /**
              * POST /api/cal
@@ -52,6 +105,20 @@ export default {
                     method: 'GET',
                     ...init,
                 }).then((res) => res.json());
+            },
+        },
+
+        song: {
+            getallsongs: {
+                /**
+                 * GET /api/song/getallsongs
+                 */
+                async GET(init?: RequestInit): Promise<any[]> {
+                    return fetch(`/api/song/getallsongs`, {
+                        method: 'GET',
+                        ...init,
+                    }).then((res) => res.json());
+                },
             },
         },
     },
