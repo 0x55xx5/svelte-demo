@@ -5,7 +5,7 @@ import { User } from '$lib/models/User';
 import { Session } from '$lib/models/Sessions';
 import pkg from '@supabase/supabase-js';
 const {QueryResult, QueryData, QueryError} = pkg;
-import { UserData } from '$lib/models/UserData';
+import { UserData } from '$lib/models/UserDatas';
 
 export async function POST({ request }) {
   const t = await request.json();
@@ -16,13 +16,13 @@ export async function POST({ request }) {
     const result = ({ "status": "error", "description": "session expired ,relogin please~~" });
     return json(result);
   }
- 
-  const { data: nowSession, error: nowSessionError } = await supabaseAdminClient.from<Session>('sessions').select().match({ session_id: token.toString() }).select().order('exp', { ascending: false });
+ const origToken=token.toString().replaceAll('*','=');
+  const { data: nowSession, error: nowSessionError } = await supabaseAdminClient.from<Session>('sessions').select().match({ session_id: origToken.toString() }).select().order('exp', { ascending: false });
   if (nowSessionError) {
     throw new Error(`get session error - ${JSON.stringify(nowSessionError, null, 2)}`);
   }
  
-  const encodeTimestemp = token.toString().split("|")[0];
+  const encodeTimestemp = origToken.toString().split("|")[0];
   const decodedTimestamp = Buffer.from(encodeTimestemp, 'base64').toString('utf-8');
   if (nowSession.length > 0) {
     
@@ -37,32 +37,31 @@ export async function POST({ request }) {
       return json(result);
     }
   }
-  else {
-    const result = ({ "status": "error", "description": "session error ,relogin please~~3" });
-    return json(result);
-  }
-  const uid = token.toString().split("|")[1];
-  const sessionWithUsersQuery = await supabaseAdminClient.from<UserData>('sessions').select(`
-  user_id,
-  session_id,
-  users (
+  
+  const uid = origToken.toString().split("|")[1];
+ 
+  const sessionWithUsersQuery = await supabaseAdminClient
+    .from('users')
+    .select(`
     id,
     username,
-    isadmin 
-  )
-`).match({ user_id: uid }).select().order('exp', { ascending: false }).limit(1);
-  type UserData = QueryData<typeof sessionWithUsersQuery>
-  
-  const { data: sessionForUser, error: userDataError } = await sessionWithUsersQuery
+    isadmin,
+      sessions(session_id, exp)
+    `)
+    .match({ id: uid })
+   // .order('exp', {referencedTable:'sessions', ascending: false })
+    .limit(1)
+    .single();
+
+   
+  const { data: sessionForUser, error: userDataError } = await sessionWithUsersQuery as { data: UserData[], error: QueryError };
   console.log(sessionForUser);
   if (userDataError) throw userDataError
 
-  const userData: UserData = sessionForUser
- 
+  const userDataRe: UserData = sessionForUser
+  
 
-
-  const result = ({ "status": "success", "dataUser": userData });
-
+  const result = ({ "status": "success", "dataUser": userDataRe });
   return json(result);
 
 }

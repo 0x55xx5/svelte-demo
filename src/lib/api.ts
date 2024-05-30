@@ -47,8 +47,10 @@ export default {
                     | { status: string; description: string }
                     | { status: string; description: string }
                     | { status: string; description: string }
-                    | { status: string; description: string }
-                    | { status: string; dataUser: any }
+                    | {
+                          status: string;
+                          dataUser: import('C:/Users/admin/Desktop/demo/svelte-demo/src/lib/models/UserDatas').UserData;
+                      }
                 > {
                     return fetch(`/api/authentication/userdata`, {
                         method: 'POST',

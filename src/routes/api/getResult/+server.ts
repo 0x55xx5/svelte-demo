@@ -13,6 +13,7 @@ export function GET({ url }) {
     }
 
     const random = min + Math.random() * d;
-
-    return new Response(String(random));
+   var resp= new Response(String(random))
+   resp.headers.set('Access-Control-Allow-Origin', '*');
+    return resp;
 }
