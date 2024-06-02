@@ -49,7 +49,7 @@ export async function POST({ request }) {
       sessions(session_id, exp)
     `)
     .match({ id: uid })
-   // .order('exp', {referencedTable:'sessions', ascending: false })
+    .order('exp', {referencedTable:'sessions', ascending: false })
     .limit(1)
     .single();
 

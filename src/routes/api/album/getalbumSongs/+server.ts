@@ -1,0 +1,15 @@
+import { json } from '@sveltejs/kit';
+import { supabaseAdminClient } from '$lib/services/supabaseAdmin';
+
+export async  function GET({url}) {
+  const album_id = Number(url.searchParams.get('album_id') ?? '0');
+  //to do 分頁
+  console.log("album_id",album_id);
+  const { data, error } = await supabaseAdminClient.from('song').select().match({ album_id: album_id });
+  if( error ) {
+      throw new Error(`loadProjects error - ${JSON.stringify(error,null,2)}`);
+  }
+
+  const result = ({ "status": "success", "descrption": "album info", "data": data});
+  return json(result);
+}

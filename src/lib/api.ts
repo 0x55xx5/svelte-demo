@@ -5,6 +5,56 @@
 
 export default {
     api: {
+        album: {
+            getalbumDetails: {
+                /**
+                 * GET /api/album/getalbumDetails
+                 */
+                async GET(
+                    init?: RequestInit,
+                ): Promise<{
+                    status: string;
+                    descrption: string;
+                    data: any[];
+                }> {
+                    return fetch(`/api/album/getalbumDetails`, {
+                        method: 'GET',
+                        ...init,
+                    }).then((res) => res.json());
+                },
+            },
+
+            getalbums: {
+                /**
+                 * GET /api/album/getalbums
+                 */
+                async GET(init?: RequestInit): Promise<any[]> {
+                    return fetch(`/api/album/getalbums`, {
+                        method: 'GET',
+                        ...init,
+                    }).then((res) => res.json());
+                },
+            },
+
+            getalbumSongs: {
+                /**
+                 * GET /api/album/getalbumSongs
+                 */
+                async GET(
+                    init?: RequestInit,
+                ): Promise<{
+                    status: string;
+                    descrption: string;
+                    data: any[];
+                }> {
+                    return fetch(`/api/album/getalbumSongs`, {
+                        method: 'GET',
+                        ...init,
+                    }).then((res) => res.json());
+                },
+            },
+        },
+
         authentication: {
             login: {
                 /**
@@ -110,7 +160,37 @@ export default {
             },
         },
 
+        search: {
+            /**
+             * GET /api/search
+             */
+            async GET(init?: RequestInit): Promise<any[]> {
+                return fetch(`/api/search`, {
+                    method: 'GET',
+                    ...init,
+                }).then((res) => res.json());
+            },
+        },
+
         song: {
+            genre: {
+                /**
+                 * GET /api/song/genre
+                 */
+                async GET(
+                    init?: RequestInit,
+                ): Promise<{
+                    status: string;
+                    descrption: string;
+                    data: any[];
+                }> {
+                    return fetch(`/api/song/genre`, {
+                        method: 'GET',
+                        ...init,
+                    }).then((res) => res.json());
+                },
+            },
+
             getallsongs: {
                 /**
                  * GET /api/song/getallsongs

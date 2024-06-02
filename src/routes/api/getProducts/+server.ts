@@ -1,3 +1,4 @@
+
 import { json } from '@sveltejs/kit';
 import { supabaseAdminClient } from '$lib/services/supabaseAdmin';
 import { Company } from '$lib/models/Company';
