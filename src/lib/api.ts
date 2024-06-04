@@ -164,7 +164,7 @@ export default {
             /**
              * GET /api/search
              */
-            async GET(init?: RequestInit): Promise<any[]> {
+            async GET(init?: RequestInit): Promise<any[] | any[] | any[]> {
                 return fetch(`/api/search`, {
                     method: 'GET',
                     ...init,
@@ -197,6 +197,20 @@ export default {
                  */
                 async GET(init?: RequestInit): Promise<any[]> {
                     return fetch(`/api/song/getallsongs`, {
+                        method: 'GET',
+                        ...init,
+                    }).then((res) => res.json());
+                },
+            },
+
+            getsongbyid: {
+                /**
+                 * GET /api/song/getsongbyid
+                 */
+                async GET(
+                    init?: RequestInit,
+                ): Promise<{ status: string; descrption: string; data: any }> {
+                    return fetch(`/api/song/getsongbyid`, {
                         method: 'GET',
                         ...init,
                     }).then((res) => res.json());
