@@ -9,6 +9,5 @@ export async  function GET({url}) {
   if( error ) {
       throw new Error(`loadProjects error - ${JSON.stringify(error,null,2)}`);
   }
-  console.log("abffffffffff",data);
   return json(data);
 }

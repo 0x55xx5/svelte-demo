@@ -16,14 +16,6 @@ export async function GET({ url }) {
   console.log(genre.length);
 
 
-  /*
-select
-*
-from
-song
-where
- (judul like '%Teduh%' or penyanyi like '%Teduh%' )
-*/
   if (kw == null) {
 
     const { data, error } = await supabaseAdminClient

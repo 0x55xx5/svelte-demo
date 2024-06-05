@@ -10,9 +10,9 @@ export async function POST({ request }) {
   const formdata = await request.formData();
   const username = formdata.get('username');
   const password = formdata.get('password');
-
+console.log("username", username);
   const { data, error } = await supabaseAdminClient.from<User>('users').select().match({ username: username, password: password });
-  //console.log(data[0].username);
+  console.log(data[0]);
   if (error) {
     throw new Error(`login error - ${JSON.stringify(error, null, 2)}`);
   }

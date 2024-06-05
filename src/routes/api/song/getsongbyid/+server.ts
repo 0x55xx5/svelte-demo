@@ -17,5 +17,6 @@ export async function GET({url})  {
       throw new Error(`loadProjects error - ${JSON.stringify(error,null,2)}`);
   }
   const result = ({ "status": "success", "descrption": "song info", "data": data[0]});
+
   return json(result);
 }

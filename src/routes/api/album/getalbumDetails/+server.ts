@@ -10,6 +10,6 @@ export async  function GET({url}) {
   }
 
   const result = ({ "status": "success", "descrption": "album info", "data": data});
- console.log(result);
+
   return json(result);
 }

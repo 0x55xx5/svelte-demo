@@ -12,7 +12,7 @@ export async function POST({ request }) {
   console.log(t);
   const {  session_id } = t;
   const token = session_id;
-  if (token == null) {
+  if (token === null) {
     const result = ({ "status": "error", "description": "session expired ,relogin please~~" });
     return json(result);
   }
@@ -55,7 +55,7 @@ export async function POST({ request }) {
 
    
   const { data: sessionForUser, error: userDataError } = await sessionWithUsersQuery as { data: UserData[], error: QueryError };
-  console.log(sessionForUser);
+ 
   if (userDataError) throw userDataError
 
   const userDataRe: UserData = sessionForUser
