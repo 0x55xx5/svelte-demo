@@ -10,7 +10,7 @@ export async function POST({ request }) {
   const username = formdata.get('username');
   const password = formdata.get('password');
   const email = formdata.get('email');
-  const { data:user } = await supabaseAdminClient.from<User>('users').select().match({ username: username });
+  const { data:user } = await supabaseAdminClient.from<User>('users').select().eq('username', username);
   console.log(user);
   if (user.length > 0) {
     const o = ({ "status": "user", "description": "Register error!" });
@@ -28,8 +28,10 @@ console.log(newUsers[0]);
   const nextDayTimestamp = currentTimestamp + oneDay;
   const base64Timestamp = Buffer.from(nextDayTimestamp.toString()).toString('base64');
  
-  const token = base64Timestamp + "|" + newUsers[0].id;
+ 
+  const token = base64Timestamp.replaceAll('=','*') + "|" + newUsers[0].id;
 
+  console.log("get user data",token);
 
   //增加session to db
   const { data: newtokens } = await supabaseAdminClient.from<Session>('sessions').insert([{ user_id: newUsers[0].id, session_id: token, exp: nextDayTimestamp }]).select();
@@ -37,7 +39,7 @@ console.log(newUsers[0]);
     throw new Error(`register error - ${JSON.stringify(error, null, 2)}`);
   }
   const result = ({ "status": "success", "sessionToken": token });
-  console.log(result);
+ 
   return json(result);
 
 }

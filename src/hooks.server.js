@@ -57,7 +57,7 @@ export async function handle({ event, resolve }) {
   }
   const KKKauth = event.request.headers.get('apikey');
   console.log("url", event.request.url );
-
+  console.log("KKKauth", KKKauth );
   if (KKKauth == 'null') {
     console.log("url", event.request.url);
     if (event.request.url === "http://localhost:5173/api/authentication/login") {
@@ -68,11 +68,7 @@ export async function handle({ event, resolve }) {
     //正常登入
     console.log("正常登入2p_KKKauth", KKKauth);
     }
-    if (event.request.url === "http://localhost:5173/api/authentication/register") {
-      //正常登入
-      console.log("正常註冊1_KKKauth", KKKauth);
-    }
-  
+
     if(event.request.url != "http://localhost:5173/api/authentication/login" && KKKauth == 'null'){
         //登入
         console.log("登出KKKauth", KKKauth);
@@ -81,17 +77,25 @@ export async function handle({ event, resolve }) {
     }
 
   }
-
+  try {
+    const response = await resolve(event);
+    for (const [key, value] of Object.entries(corsHeaders)) {
+      response.headers.set(key, value);
+    }
+    return response;
+  } catch (error) {
+    console.log("error", error);  
+  }/* 
 
   // 3. For other request methods, let the sveltekit router resolve it, then add the CORS headers
   const response = await resolve(event);
   for (const [key, value] of Object.entries(corsHeaders)) {
     response.headers.set(key, value);
   }
-  return response;
+  return response;*/
 }
 
-
+/*
 export const allowCORS = (async ({ event, resolve }) => {
 
   const corsHeaders = {
@@ -121,4 +125,4 @@ export const allowCORS = (async ({ event, resolve }) => {
     response.headers.set(key, value);
   }
   return response;
-});
+});*/
