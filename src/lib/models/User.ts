@@ -1,5 +1,5 @@
 export type  User = {
-    id: number;
-    username: string;
-    isadmin:boolean;
+    id: Number;
+    username: String;
+    isadmin:Boolean;
 };

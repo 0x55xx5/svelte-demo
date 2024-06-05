@@ -27,7 +27,7 @@ console.log(newUsers[0]);
   const currentTimestamp = Date.now();
   const nextDayTimestamp = currentTimestamp + oneDay;
   const base64Timestamp = Buffer.from(nextDayTimestamp.toString()).toString('base64');
-  console.log(base64Timestamp);
+ 
   const token = base64Timestamp + "|" + newUsers[0].id;
 
 
@@ -37,6 +37,7 @@ console.log(newUsers[0]);
     throw new Error(`register error - ${JSON.stringify(error, null, 2)}`);
   }
   const result = ({ "status": "success", "sessionToken": token });
+  console.log(result);
   return json(result);
 
 }

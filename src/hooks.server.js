@@ -68,6 +68,10 @@ export async function handle({ event, resolve }) {
     //正常登入
     console.log("正常登入2p_KKKauth", KKKauth);
     }
+    if (event.request.url === "http://localhost:5173/api/authentication/register") {
+      //正常登入
+      console.log("正常註冊1_KKKauth", KKKauth);
+    }
   
     if(event.request.url != "http://localhost:5173/api/authentication/login" && KKKauth == 'null'){
         //登入
