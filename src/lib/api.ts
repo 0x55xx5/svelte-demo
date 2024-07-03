@@ -55,6 +55,23 @@ export default {
             },
         },
 
+        auth: {
+            /**
+             * POST /api/auth
+             */
+            async POST(
+                init?: RequestInit,
+            ): Promise<{
+                StatusCode: number;
+                Data: { Md5Key: string; SettingKey: string };
+            }> {
+                return fetch(`/api/auth`, {
+                    method: 'POST',
+                    ...init,
+                }).then((res) => res.json());
+            },
+        },
+
         authentication: {
             login: {
                 /**
@@ -107,6 +124,23 @@ export default {
                         ...init,
                     }).then((res) => res.json());
                 },
+            },
+        },
+
+        auth_for_synd: {
+            /**
+             * POST /api/auth_for_synd
+             */
+            async POST(
+                init?: RequestInit,
+            ): Promise<{
+                StatusCode: number;
+                Data: { Md5Key: string; SettingKey: string };
+            }> {
+                return fetch(`/api/auth_for_synd`, {
+                    method: 'POST',
+                    ...init,
+                }).then((res) => res.json());
             },
         },
 
