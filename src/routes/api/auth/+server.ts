@@ -1,22 +1,29 @@
 import { json } from '@sveltejs/kit';
 import { error } from '@sveltejs/kit';
+import CryptoJS from 'crypto-js'
 
 
 /** @type {import('./$types').RequestHandler} */
 
 export async function POST({ request }) {
-  const formdata = await request.json();
-  console.log(formdata);
-  const {  Token } = formdata;
+  const jsondata = await request.json();
+  console.log(jsondata);
+  const {  token,cipher } = jsondata;
   
-  console.log("Token", Token);
-  const data = ({"Md5Key": "650293972d38dc9c23704fbcaa40a5ed",
-    "SettingKey": "9b358f663a33c6e8d9cbf029553c13fa"
+  
+  console.log("Token", token);
+  console.log("Cipher", cipher);
+  const data = ({"Md5Key": "c555644584079d9b88946c1c9d867cd6",
+    "SettingKey": "30c535eee29f932ef0e700d72078cb77"
   });
-  /*const data = ({"Md5Key": "b8815bb80912972ee6a5cf132408472a",
-    "SettingKey": "35a10c201a632a1b2e9d99dba47eee0b"
-  });*/
-  var o = ({ "StatusCode": 200, "Data": data });
+//650293972d38dc9c23704fbcaa40a5ed ,setting 9b358f663a33c6e8d9cbf029553c13fa 转账的
+
+  let  content_md5 = CryptoJS.MD5(cipher+"650293972d38dc9c23704fbcaa40a5ed"+"9b358f663a33c6e8d9cbf029553c13fa").toString(CryptoJS.enc.Hex).toLowerCase()
+/*  const data = ({"Md5Key": "5a19a34b3cdf06eae12eef34c6ca77ba",
+    "SettingKey": "74edd0eebc9507bddc63e6a3ec821aa8"
+  });//轉帳*/
+  console.log("Return MD5", content_md5);
+  var o = ({ "StatusCode": 200, "Data": {"sign":content_md5} });
   return json(o);
 /*
 {

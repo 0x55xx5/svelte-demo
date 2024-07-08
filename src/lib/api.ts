@@ -61,10 +61,7 @@ export default {
              */
             async POST(
                 init?: RequestInit,
-            ): Promise<{
-                StatusCode: number;
-                Data: { Md5Key: string; SettingKey: string };
-            }> {
+            ): Promise<{ StatusCode: number; Data: { sign: any } }> {
                 return fetch(`/api/auth`, {
                     method: 'POST',
                     ...init,
@@ -133,10 +130,7 @@ export default {
              */
             async POST(
                 init?: RequestInit,
-            ): Promise<{
-                StatusCode: number;
-                Data: { Md5Key: string; SettingKey: string };
-            }> {
+            ): Promise<{ StatusCode: number; Data: { sign: any } }> {
                 return fetch(`/api/auth_for_synd`, {
                     method: 'POST',
                     ...init,

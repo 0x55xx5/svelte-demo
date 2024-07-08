@@ -1,22 +1,22 @@
 import { json } from '@sveltejs/kit';
 import { error } from '@sveltejs/kit';
-
+import CryptoJS from 'crypto-js'
 
 /** @type {import('./$types').RequestHandler} */
 
 export async function POST({ request }) {
   const formdata = await request.json();
   console.log(formdata);
-  const {  Token } = formdata;
+  const {  cipher } = formdata;
   
-  console.log("Token", Token);
+  //af7427db9b2025b3688c3d11c0890fbb ,setting 4eace912c53d8f4095ab2a184230e2d4 免转的
+  console.log("cipher", cipher);
   const data = ({"Md5Key": "af7427db9b2025b3688c3d11c0890fbb",
     "SettingKey": "4eace912c53d8f4095ab2a184230e2d4"
   });
-  /*const data = ({"Md5Key": "b8815bb80912972ee6a5cf132408472a",
-    "SettingKey": "35a10c201a632a1b2e9d99dba47eee0b"
-  });*/
-  var o = ({ "StatusCode": 200, "Data": data });
+
+  let  content_md5 = CryptoJS.MD5(cipher+"af7427db9b2025b3688c3d11c0890fbb"+"4eace912c53d8f4095ab2a184230e2d4").toString(CryptoJS.enc.Hex).toLowerCase()
+  var o = ({ "StatusCode": 200, "Data": {"sign":content_md5} });
   return json(o);
 /*
 {
