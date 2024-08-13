@@ -124,14 +124,28 @@ export default {
             },
         },
 
-        auth_for_synd: {
+        auth_for_synd_seamless: {
             /**
-             * POST /api/auth_for_synd
+             * POST /api/auth_for_synd_seamless
              */
             async POST(
                 init?: RequestInit,
             ): Promise<{ StatusCode: number; Data: { sign: any } }> {
-                return fetch(`/api/auth_for_synd`, {
+                return fetch(`/api/auth_for_synd_seamless`, {
+                    method: 'POST',
+                    ...init,
+                }).then((res) => res.json());
+            },
+        },
+
+        auth_for_synd_trans: {
+            /**
+             * POST /api/auth_for_synd_trans
+             */
+            async POST(
+                init?: RequestInit,
+            ): Promise<{ StatusCode: number; Data: { sign: any } }> {
+                return fetch(`/api/auth_for_synd_trans`, {
                     method: 'POST',
                     ...init,
                 }).then((res) => res.json());

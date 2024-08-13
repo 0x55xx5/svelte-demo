@@ -19,7 +19,7 @@ export async function POST({ request }) {
 
 //"f474eb661208f7718e34355c9368344b"+"46252cdfd48b760ccf547ce534f8acbe"
 //dab14be8b36ac230f9b505f0fe6f8636  / d032ad4c1e2931b246f46556dfecd1c9 轉帳
-  let  content_md5 = CryptoJS.MD5(cipher+"dab14be8b36ac230f9b505f0fe6f8636"+"d032ad4c1e2931b246f46556dfecd1c9").toString(CryptoJS.enc.Hex).toLowerCase()
+  let  content_md5 = CryptoJS.MD5(cipher+"b8334338472ce10f5fef464f86e570dc"+"6228aee3a2aa3c75dc2de6ee281c1303").toString(CryptoJS.enc.Hex).toLowerCase()
 
   console.log("Return MD5", content_md5);
   var o = ({ "StatusCode": 200, "Data": {"sign":content_md5} });
