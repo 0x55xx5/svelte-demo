@@ -22,7 +22,7 @@ export async function POST({ request }) {
   let  content_md5 = CryptoJS.MD5(cipher+"b8334338472ce10f5fef464f86e570dc"+"6228aee3a2aa3c75dc2de6ee281c1303").toString(CryptoJS.enc.Hex).toLowerCase()
 
   console.log("Return MD5", content_md5);
-  var o = ({ "StatusCode": 200, "Data": {"sign":content_md5} });
+  var o = ({ "code": 200, "Data": {"sign":content_md5} });
   return json(o);
 /*
 {

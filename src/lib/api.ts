@@ -61,7 +61,7 @@ export default {
              */
             async POST(
                 init?: RequestInit,
-            ): Promise<{ StatusCode: number; Data: { sign: any } }> {
+            ): Promise<{ code: number; Data: { sign: any } }> {
                 return fetch(`/api/auth`, {
                     method: 'POST',
                     ...init,
@@ -130,7 +130,7 @@ export default {
              */
             async POST(
                 init?: RequestInit,
-            ): Promise<{ StatusCode: number; Data: { sign: any } }> {
+            ): Promise<{ code: number; Data: { sign: any } }> {
                 return fetch(`/api/auth_for_synd_seamless`, {
                     method: 'POST',
                     ...init,
@@ -144,7 +144,7 @@ export default {
              */
             async POST(
                 init?: RequestInit,
-            ): Promise<{ StatusCode: number; Data: { sign: any } }> {
+            ): Promise<{ code: number; Data: { sign: any } }> {
                 return fetch(`/api/auth_for_synd_trans`, {
                     method: 'POST',
                     ...init,
